@@ -19,7 +19,7 @@ io.on('connection', function(socket) {
   socket.on('chat', function(msg) {
     var user = connectedUsers[socket.id];
     user = (user) ? user : 'anonymous';
-    io.emit('chat', user +' - '+ msg);
+    socket.broadcast.emit('chat', user +' - '+ msg);
   });
 
   socket.on('disconnect', function() {
