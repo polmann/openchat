@@ -16,6 +16,12 @@ io.on('connection', function(socket) {
     socket.broadcast.emit('chat', user + ' is connected');
   });
 
+  socket.on('typing', function() {
+    var user = connectedUsers[socket.id];
+    user = (user) ? user : 'anonymous';
+    socket.broadcast.emit('typing', user);
+  });
+
   socket.on('chat', function(msg) {
     var user = connectedUsers[socket.id];
     user = (user) ? user : 'anonymous';
