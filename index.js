@@ -6,16 +6,27 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+
+var connectedUsers = [];
+
 io.on('connection', function(socket) {
-  io.emit('chat message', 'user connected');
 
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+  socket.on('hello', function(user) {
+    connectedUsers[socket.id] = user;
+    socket.broadcast.emit('chat', user + ' is connected');
   });
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
+  socket.on('chat', function(msg) {
+    var user = connectedUsers[socket.id];
+    user = (user) ? user : 'anonymous';
+    io.emit('chat', user +' - '+ msg);
   });
+
+  socket.on('disconnect', function() {
+    socket.broadcast.emit('chat', 'user ' +connectedUsers[socket.id]+ ' disconnected');
+    delete connectedUsers[socket.id];
+  });
+
 });
 
 http.listen(3000, function(){
