@@ -7,12 +7,14 @@ app.get('/', function(req, res){
 });
 
 
-var connectedUsers = [];
+var connectedUsers = {};
 
 io.on('connection', function(socket) {
 
   socket.on('hello', function(user) {
+    socket.emit('usersonline', connectedUsers);
     connectedUsers[socket.id] = user;
+    socket.broadcast.emit('userconnected', user);
     socket.broadcast.emit('chat', user + ' is connected');
   });
 
@@ -29,8 +31,10 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    socket.broadcast.emit('chat', 'user ' +connectedUsers[socket.id]+ ' disconnected');
-    delete connectedUsers[socket.id];
+    var user = connectedUsers[socket.id];
+    socket.broadcast.emit('userdisconnected', user);
+    socket.broadcast.emit('chat', 'user ' + user + ' disconnected');
+    delete user;
   });
 
 });
