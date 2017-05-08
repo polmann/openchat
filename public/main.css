@@ -1,0 +1,35 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #app { height: 100%; width: 100%; overflow: hidden; padding: 0; margin: 0; }
+
+body { font: 13px Helvetica, Arial; color: #676a6c; background-color: #f3f3f4; }
+
+.navbar-default { border: 0; background-color: #293846; padding: 10px 0; position: fixed; width: 100%; top: 0; }
+.navbar-default .navbar-brand { color: #f3f3f4; margin-right: 0; }
+
+.content { padding-top: 51px; height: 100%; }
+
+.ellipsis { position: relative; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.sidebar { background-color: #2f4050; color: #f3f3f4; }
+.nav.flex-column { overflow: scroll; height: 100%; }
+.nav.flex-column>li+li { margin-top: 0; }
+.nav.flex-column>li>a { border-radius: initial; color: inherit; }
+.nav.flex-column>li>a:hover { background-color: rgba(41,56,70, 0.5); }
+.nav.flex-column>li>a:focus { background-color: #293846; }
+.nav.flex-column>li>a:focus .username { color: #1ab394; }
+.nav.flex-column>li>a:focus .last-message { color: #f3f3f4; }
+.profile-picture { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; }
+.user-info { display: inline-block; }
+.username { font-size: 15px; font-weight: 600; color: #1ab394; }
+
+
+#typing { padding: 3px; position: fixed; bottom: 40px; width: 100%; }
+
+#messages { list-style-type: none; margin: 0; padding: 10px; height: 100%; padding-bottom: 81px; overflow: scroll; }
+#messages .d-flex { margin-bottom: 2px; }
+.message { padding: 5px 10px; background: rgba(103,106,108,0.1); color: #000000; border-radius: 5px; }
+.message.mine { background-color: rgba(26,179,148, 0.1); }
+
+#type-message-group { padding: 10px 20px; background-color: #ededed; position: fixed; bottom: 0; }
+#type-message { border: 0; border-radius: 0; }
+#type-message-btn { margin: 0; border-radius: 0; background-image: initial; box-shadow: initial; background-color: #1ab394; color: #ffffff; }

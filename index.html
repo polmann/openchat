@@ -1,86 +1,46 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Socket.IO chat</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { height: 100%; }
-        body { height: 100%; font: 13px Helvetica, Arial; }
-        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 80%; }
-        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-        #onlineusers { width: 20%; height: 100%; float: left; border: 2px solid #000; padding: 10px; }
-        .user { padding: 3px; }
-        #typing { padding: 3px; position: fixed; bottom: 40px; width: 100%; }
-        #messages { list-style-type: none; margin: 0; padding: 10px; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
-    </style>
+    <title>WebChat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-<div id="onlineusers"></div>
-<div style="width: 80%; float: right;">
-    <ul id="messages"></ul>
-    <div id="typing"></div>
-    <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-    $(function () {
-        var user = prompt('username', 'username');
-        var socket = io();
-        var aUserIsTyping = 0;
 
-        $('form').submit(function() {
-
-            var message = $('#m').val();
-            $('#messages').append($('<li>').text(message));
-            socket.emit('chat', message);
-
-            $('#m').val('');
-            return false;
-
-        });
-
-        socket.on('usersonline', function(users) {
-            console.log('users: ', users);
-            Object.keys(users).map(function(key, value) {
-                var user = users[key];
-                console.log(key + ': ', user);
-                $('#onlineusers').append($('<div class="user" id="'+user+'"></div>').text(user));
-            });
-        });
-
-        socket.on('userconnected', function(user) {
-            console.log('userconnected', user);
-           $('#onlineusers').append($('<div class="user" id="'+user+'"></div>').text(user));
-        });
-
-        socket.on('chat', function(msg) {
-            $('#messages').append($('<li>').text(msg));
-        });
-
-        socket.on('typing', function(user) {
-            $('#typing').html(user + ' is typing...');
-            clearTimeout(aUserIsTyping);
-            aUserIsTyping = setTimeout(function() { $('#typing').html(''); }, 400);
-        });
-
-        socket.on('userdisconnected', function(user) {
-            console.log('userdisconnected', user);
-           $('#'+user).remove();
-        });
-
-        socket.emit('hello', user);
-
-        $('#m').keypress(function() {
-            socket.emit('typing');
-        });
-
-    });
-</script>
+    <div id="app" class="container-fluid">
+        <nav class="navbar navbar-default">
+            <a class="navbar-brand col-sm-4 col-md-3" href="/">WebChat</a>
+        </nav>
+        <div class="row no-gutters content">
+            <div class="col-sm-4 col-md-3 sidebar">
+                <ul class="nav flex-column" id="onlineusers">
+                </ul>
+            </div>
+            <div class="col-sm-8 col-md-9">
+                    <div id="messages"></div>
+                <form action="">
+                    <div class="input-group input-group-lg col-sm-8 col-md-9" id="type-message-group">
+                        <input type="text" class="form-control" aria-describedby="sizing-addon1"
+                               placeholder="Type a message" id="type-message" autocomplete="off">
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" id="type-message-btn">
+                                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                                </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://use.fontawesome.com/58fffb0b4c.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"></script>
+    <script src="script.js"></script>
 </body>
 </html>
