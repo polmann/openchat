@@ -12,35 +12,35 @@
 </head>
 <body>
 
-    <div id="app" class="container-fluid">
-        <nav class="navbar navbar-default">
-            <a class="navbar-brand col-sm-4 col-md-3" href="/">WebChat</a>
-        </nav>
-        <div class="row no-gutters content">
-            <div class="col-sm-4 col-md-3 sidebar">
-                <ul class="nav flex-column" id="onlineusers">
-                </ul>
-            </div>
-            <div class="col-sm-8 col-md-9">
-                    <div id="messages"></div>
-                <form action="">
-                    <div class="input-group input-group-lg col-sm-8 col-md-9" id="type-message-group">
-                        <input type="text" class="form-control" aria-describedby="sizing-addon1"
-                               placeholder="Type a message" id="type-message" autocomplete="off">
-                        <span class="input-group-btn">
+<div id="app" class="container-fluid">
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand col-sm-4 col-md-3" href="/">WebChat</a>
+    </nav>
+    <div class="row no-gutters content">
+        <div class="col-sm-4 col-md-3 sidebar">
+            <ul class="nav flex-column" id="onlineusers">
+            </ul>
+        </div>
+        <div class="col-sm-8 col-md-9">
+            <div id="messages"></div>
+            <form action="">
+                <div class="input-group input-group-lg col-sm-8 col-md-9" id="type-message-group">
+                    <input type="text" class="form-control" aria-describedby="sizing-addon1"
+                           placeholder="Type a message" id="type-message" autocomplete="off">
+                    <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit" id="type-message-btn">
                                     <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                 </button>
                         </span>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://use.fontawesome.com/58fffb0b4c.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://use.fontawesome.com/58fffb0b4c.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script src="../build/app.min.js"></script>
 </body>
 </html>
