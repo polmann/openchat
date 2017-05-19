@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import ProfilePicture from './profile-picture'
 
 export default class Conversation extends Component {
+  handleClick (e) {
+    e.preventDefault()
+    // todo
+  }
+
   render () {
-    const { profilePicture } = this.props
-    const { name } = this.props
-    const { lastMessage } = this.props
+    const { profilePicture, name, lastMessage } = this.props
     return (
-      <li>
+      <li onClick={this.handleClick.bind(this)}>
         <a className='nav-link' href='#'>
           <ProfilePicture src={profilePicture} />
           <div className='conversation-info'>

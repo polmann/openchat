@@ -3,7 +3,7 @@ import ChatHeader from '../stateless/chat-header'
 import History from '../stateless/history'
 import TypeMessage from '../stateless/type-message'
 
-export default class Chat extends Component {
+export default class ChatContainer extends Component {
   constructor () {
     super()
     this.state = {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Navbar from '../stateless/navbar'
-import ListConversations from '../stateless/list-conversations'
+import ChatContainer from '../containers/chat'
+import SidebarContainer from '../containers/sidebar'
 
-export default class Sidebar extends Component {
+export default class Chat extends Component {
   constructor () {
     super()
     this.state = {
@@ -35,9 +35,9 @@ export default class Sidebar extends Component {
 
   render () {
     return (
-      <div className='col-sm-4 col-md-3 sidebar'>
-        <Navbar />
-        <ListConversations conversations={this.state.conversations} />
+      <div className='row no-gutters'>
+        <SidebarContainer />
+        <ChatContainer />
       </div>
     )
   }
