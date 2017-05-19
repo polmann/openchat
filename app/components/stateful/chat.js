@@ -22,9 +22,11 @@ export default class Chat extends Component {
   }
 
   handleTypedMessage (typedMessage) {
-    let history = this.state.conversation.history
-    history.push({username: 'me', content: typedMessage})
-    this.setState({history})
+    if (typedMessage) {
+      let history = this.state.conversation.history
+      history.push({username: 'me', content: typedMessage})
+      this.setState({history})
+    }
   }
 
   render () {
