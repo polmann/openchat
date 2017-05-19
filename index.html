@@ -2,45 +2,18 @@
 <html lang="en">
 <head>
     <title>WebChat</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="icon" type="image/png" href="img/favicon.png">
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-
-<div id="app" class="container-fluid">
-    <nav class="navbar navbar-default">
-        <a class="navbar-brand col-sm-4 col-md-3" href="/">WebChat</a>
-    </nav>
-    <div class="row no-gutters content">
-        <div class="col-sm-4 col-md-3 sidebar">
-            <ul class="nav flex-column" id="onlineusers">
-            </ul>
-        </div>
-        <div class="col-sm-8 col-md-9">
-            <div id="messages"></div>
-            <form action="">
-                <div class="input-group input-group-lg col-sm-8 col-md-9" id="type-message-group">
-                    <input type="text" class="form-control" aria-describedby="sizing-addon1"
-                           placeholder="Type a message" id="type-message" autocomplete="off">
-                    <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit" id="type-message-btn">
-                                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                                </button>
-                        </span>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://use.fontawesome.com/58fffb0b4c.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-<script src="../build/app.min.js"></script>
+	<div id="app" class="container-fluid"></div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://use.fontawesome.com/58fffb0b4c.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+	<script src="./js/client.min.js"></script>
 </body>
 </html>

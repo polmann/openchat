@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -8,17 +7,16 @@ var io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(express.static('public'));
+app.use(express.static('static'));
 
 app.get('/', function (req, res) {
-    res.redirect('/login');
+    //res.redirect('/login');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/', function (req, res) {
     console.log(req.body);
     console.log(req.cookies);
-    res.cookie('username', req.body.username);
     res.sendFile(__dirname + '/index.html');
 });
 

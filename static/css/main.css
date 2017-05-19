@@ -22,25 +22,17 @@ body {
 .navbar-default {
     border: 0;
     background-color: #293846;
-    padding: 10px 0;
-    position: fixed;
+    padding: 14px 0;
     width: 100%;
+    min-height: 58px;
     top: 0;
-}
-
-.navbar-default .navbar-brand {
     color: #f3f3f4;
-    margin-right: 0;
     font-weight: 600;
+    font-size: 20px;
 }
 
-.container-fluid {
+.container-fluid, .row.no-gutters {
     height: 100%;
-}
-
-.content {
-    padding-top: 58px;
-    height: 100%
 }
 
 .ellipsis {
@@ -77,7 +69,7 @@ body {
     background-color: #293846;
 }
 
-.nav.flex-column > li > a:focus .username {
+.nav.flex-column > li > a:focus .name {
     color: #1ab394;
 }
 
@@ -92,33 +84,32 @@ body {
     margin-right: 15px;
 }
 
-.user-info {
+.conversation-info {
     display: inline-block;
 }
 
-.username {
+.name {
     font-size: 15px;
     font-weight: 600;
     color: #1ab394;
 }
 
-#typing {
-    padding: 3px;
-    position: fixed;
-    bottom: 40px;
-    width: 100%;
+.chat-header {
+    color: #fff;
+    font-size: 25px;
+    padding-left: 10px;
 }
 
-#messages {
+#history {
     list-style-type: none;
     margin: 0;
     padding: 10px;
     height: 100%;
-    padding-bottom: 81px;
+    padding-bottom: 139px;
     overflow: scroll;
 }
 
-#messages .d-flex {
+#history .d-flex {
     margin-bottom: 2px;
 }
 

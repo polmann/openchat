@@ -2,20 +2,33 @@
   "name": "webchat",
   "version": "0.0.1",
   "description": "a socket.io tutorial",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "npm run start | npm run webpack",
+    "webpack": "webpack --watch",
+    "fix": "standard --fix"
+  },
   "dependencies": {
-    "babel": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.17.1",
-    "cookie-parser": "^1.4.3",
+    "boostrap": "^1.0.0",
     "express": "^4.15.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.6.0",
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "standard": "^10.0.2",
     "webpack": "^2.5.1"
   }
 }
