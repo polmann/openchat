@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class TypeMessage extends Component {
+export default class MessageInput extends Component {
   handleSubmit (e) {
     e.preventDefault()
     this.props.onSubmit(this.refs.typedMessage.value)
@@ -31,4 +31,8 @@ export default class TypeMessage extends Component {
       </form>
     )
   }
+}
+
+MessageInput.defaultProps = {
+  onSubmit: function () {}
 }

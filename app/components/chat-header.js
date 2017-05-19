@@ -10,3 +10,7 @@ export default class ChatHeader extends Component {
     )
   }
 }
+
+ChatHeader.defaultProps = {
+  name: ''
+}

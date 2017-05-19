@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "body-parser": "^1.17.1",
-    "boostrap": "^1.0.0",
+    "bootstrap": "^4.0.0-alpha.6",
     "express": "^4.15.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

@@ -61,19 +61,22 @@ body {
     color: inherit;
 }
 
-.nav.flex-column > li > a:hover {
+.nav.flex-column > li:hover {
     background-color: rgba(41, 56, 70, 0.5);
 }
 
-.nav.flex-column > li > a:focus {
+.nav.flex-column > li:focus,
+.nav.flex-column > li.active {
     background-color: #293846;
 }
 
-.nav.flex-column > li > a:focus .name {
+.nav.flex-column > li:focus .name,
+.nav.flex-column > li.active .name {
     color: #1ab394;
 }
 
-.nav.flex-column > li > a:focus .last-message {
+.nav.flex-column > li:focus .last-message,
+.nav.flex-column > li.active .last-message {
     color: #f3f3f4;
 }
 

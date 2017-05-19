@@ -5,3 +5,7 @@ export default class ProfilePicture extends Component {
     return <img className='profile-picture' src={this.props.src} />
   }
 }
+
+ProfilePicture.defaultProps = {
+  src: ''
+}
