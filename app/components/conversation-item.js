@@ -26,7 +26,6 @@ export default class ConversationItem extends Component {
 
 ConversationItem.defaultProps = {
   conversation: {
-    profilePicture: 'img/default-profile.png',
     name: 'Anonymous',
     history: []
   },

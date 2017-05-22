@@ -17,7 +17,6 @@ export default class Chat extends Component {
         {
           id: 1,
           name: 'Alice',
-          profilePicture: 'img/default-profile.png',
           history: [
             {username: 'me', content: 'hi'},
             {username: 'Alice', content: 'hello'},
@@ -28,7 +27,6 @@ export default class Chat extends Component {
         {
           id: 2,
           name: 'Bob',
-          profilePicture: 'img/default-profile.png',
           history: [
             {username: 'me', content: 'yeaah'}
           ]

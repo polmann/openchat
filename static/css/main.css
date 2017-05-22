@@ -1,3 +1,7 @@
+@import url("./font-family.css");
+@import url("./bootstrap.min.css");
+
+
 * {
     margin: 0;
     padding: 0;
