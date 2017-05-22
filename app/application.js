@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { browserHistory, BrowserRouter, Route, Switch } from 'react-router-dom'
 
-// import Chat from './pages/chat'
+import Chat from './pages/chat'
 import Login from './pages/login'
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Route path='/' component={Login} />
+  <BrowserRouter history={browserHistory}>
+    <Switch>
+      <Route name='login' exact path='/' component={Login} />
+      <Route name='chat' path='/c' component={Chat} />
+    </Switch>
   </BrowserRouter>,
     document.getElementById('app')
 )
