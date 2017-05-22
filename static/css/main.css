@@ -19,6 +19,47 @@ body {
     background-color: #f3f3f4;
 }
 
+
+.justify-content-center {
+    color: #f3f3f4;
+    background-color: #2f4050;
+}
+
+.invert {
+    color: #2f4050;
+    background-color: #f3f3f4;
+}
+
+.login-wrap {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #293846;
+}
+
+.logo {
+    width: 50px;
+}
+
+.form-group {
+    padding: 10px 20px;
+    margin: 0;
+}
+
+#username {
+    border-radius: 0;
+}
+
+#enter-btn {
+    margin: 0;
+    margin-top: 10px;
+    border-radius: 0;
+    background-image: initial;
+    box-shadow: initial;
+    background-color: #1ab394;
+    color: #ffffff;
+}
+
+
 .navbar-default {
     border: 0;
     background-color: #293846;
