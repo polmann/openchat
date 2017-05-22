@@ -1,4 +1,4 @@
 .idea
 node_modules
-build
-static/js
+static/client.min.js
+static/main.min.css
