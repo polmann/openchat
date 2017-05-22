@@ -30,6 +30,11 @@ module.exports = {
     new ExtractTextPlugin('main.min.css'),
     new OptimizeCssAssetsPlugin({ cssProcessorOptions: { discardComments: {removeAll: true} } }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {warnings: false},
       mangle: true,

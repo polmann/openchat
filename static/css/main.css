@@ -130,10 +130,12 @@ body {
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
+    vertical-align: inherit;
 }
 
 .conversation-info {
     display: inline-block;
+    vertical-align: top;
 }
 
 .name {

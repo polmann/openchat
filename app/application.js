@@ -1,4 +1,4 @@
-import css from '../static/css/main.css'
+import '../static/css/main.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { browserHistory, BrowserRouter, Route, Switch } from 'react-router-dom'

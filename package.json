@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "description": "a socket.io tutorial",
   "scripts": {
-    "start": "node index.js",
-    "dev": "npm run start | npm run webpack",
-    "webpack": "webpack --watch",
+    "start": "node server.js",
+    "dev": "nodemon ./server/server.js | webpack --watch",
     "fix": "standard --fix"
   },
   "dependencies": {
