@@ -1,0 +1,211 @@
+FORMAT: 1A
+
+# OpenChat API
+Version 0.0.1 - OpenChat Web Service's Rest API.
+
+
+
+## Data Structures
+
+
+### UserCredentials
++ email: foo@bar.com (string, required)
++ password: 827ccb0eea8a706c4c34a16891f84e7b (string, required)
+
+### AuthorizationToken
++ token: aD36YU64c70vh29e8292277t8PMU2739 (string)
++ profile (Profile)
+
+### Profile
++ id: 123456 (number, required)
++ email: foo@bar.com (string, required)
++ name: Test McTest (string)
++ username: test (string)
++ profilePicture: img/users/foo.png (string)
++ password: 827ccb0eea8a706c4c34a16891f84e7b (string, required)
+
+### ContactId
++ contactId: 123456 (number, required)
+
+### AcceptContact
++ contactId (ContactId)
++ accepted: true (boolean)
+
+### Contact
++ id: 123456 (number, required)
++ username: test (string, required)
++ profilePicture: img/users/foo.png (string)
+
+### ErrorEmailPassword
++ error: Email and password are required (string)
+
+### ErrorContactId
++ error: Contact id is required (string)
+
+### ErrorContactNotFound
++ error: Contact not found (string)
+
+### ErrorBadRequest
++ error: Invalid request, check your required parameters (string)
+
+### ErrorNotFound
++ error: Resource not found (string)
+
+### ErrorUnauthorized
++ error: Nothing to see here (string)
+
+
+
+
+
+# Group User
+
+
+## SIGN UP [/api/user/signup]
+### Sign Up [POST]
+Signup a new user
++ Request example (application/json)
+  + Attributes (UserCredentials)
++ Response 201
++ Response 400
+  + Attributes (ErrorEmailPassword)
+
+
+## LOGIN [/api/user/login]
+### Login [POST]
+Check the user credentials
++ Request example (application/json)
+  + Attributes (UserCredentials)
++ Response 200
+  + Attributes (AuthorizationToken)
++ Response 400
+  + Attributes (ErrorEmailPassword)
+
+
+## LOGOUT [/api/user/logout]
+### Logout [GET]
+Log user out of the application
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
++ Response 200
++ Response 401
+  + Attributes (ErrorUnauthorized)
+
+
+## PROFILE [/api/user/profile]
+### Get Profile [GET]
+Get the authorized user's profile
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
++ Response 200
+    + Attributes (Profile)
++ Response 401
+  + Attributes (ErrorUnauthorized)
+
+### Update Profile [PUT]
+Update the authorized user's profile
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
+    + Attributes (Profile)
++ Response 200
++ Response 400
+  + Attributes (ErrorBadRequest)
++ Response 401
+  + Attributes (ErrorUnauthorized)
+
+### Archive Profile [DELETE]
+Archive the authorized user's profile
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
++ Response 200
++ Response 401
+  + Attributes (ErrorUnauthorized)
+
+
+
+
+
+# Group Contacts
+
+
+## MAIN CONTACTS [/api/contacts]
+### Get Contacts [GET]
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
++ Response 200
+  + Attributes (array[Contact])
++ Response 401
+  + Attributes (ErrorUnauthorized)
+
+### Add Contact [POST]
+Add a new contact from contactId
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
+    + Attributes (ContactId)
++ Response 200
++ Response 400
+  + Attributes (ErrorContactId)
++ Response 401
+  + Attributes (ErrorUnauthorized)
++ Response 404
+  + Attributes (ErrorContactNotFound)
+
+### Accept/Reject Contact [PUT]
+Reply if accept (true) or reject (false) a contact request from contactId. Default is accepted.
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
+    + Attributes (AcceptContact)
++ Response 200
++ Response 400
+  + Attributes (ErrorContactId)
++ Response 401
+  + Attributes (ErrorUnauthorized)
++ Response 404
+  + Attributes (ErrorContactNotFound)
+
+### Archive Contact [DELETE]
+Archive a contact from contactId
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
+    + Attributes (ContactId)
++ Response 200
++ Response 400
+  + Attributes (ErrorContactId)
++ Response 401
+  + Attributes (ErrorUnauthorized)
++ Response 404
+  + Attributes (ErrorContactNotFound)
+
+
+## FIND CONTACTS [/api/contacts/search/:searchTearm]
+### Search Contacts [GET]
+Search for a contact that matches the search term
++ Request example (application/json)
+    + Headers
+
+            Authorization: Bearer aD36YU64c70vh29e8292277t8PMU2739
+    + Parameters
+      + searchTerm: test (string) - the string to search for matching results
++ Response 200
++ Response 401
+  + Attributes (ErrorUnauthorized)
++ Response 404
+  + Attributes (ErrorContactNotFound)
+
+
