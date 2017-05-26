@@ -1,52 +1,58 @@
 'use strict'
 
-const path = require('path')
-const express = require('express')
-const compression = require('compression')
-const bodyParser = require('body-parser')
-const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
+import path from 'path'
+import http from 'http'
+import EventEmitter from 'events'
+import express from 'express'
+import compression from 'compression'
+import bodyParser from 'body-parser'
+import IndexController from './rest/controllers/index'
+import SocketManager from './rtc/socket-manager'
 
-app.use(compression())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(express.static('static'))
+export default class Server {
+  constructor (config) {
+    this.config = config
+    this.express = express()
+    this.router = express.Router()
+    this.httpServer = http.Server(this.express)
+    this.controller = null
+    this.eventEmitter = new EventEmitter()
+    this.init()
+  }
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '..', '/index.html'))
-})
+  init () {
+    this.initDatabase()
+    // this.initRestControllers()
+    this.initExpress()
+    this.initRoutes()
+    this.initSocketManager()
+    this.httpServer.listen(this.config.port, () => {
+      console.log('listening on *:', this.config.port)
+    })
+  }
 
-var connectedUsers = {}
+  initDatabase () {}
 
-io.on('connection', function (socket) {
-  socket.on('hello', function (user) {
-    socket.emit('usersonline', connectedUsers)
-    connectedUsers[socket.id] = user
-    socket.broadcast.emit('userconnected', user)
-    socket.broadcast.emit('chat', user + ' is connected')
-  })
+  initExpress () {
+    this.express.use(compression())
+    this.express.use(bodyParser.json())
+    this.express.use(bodyParser.urlencoded({extended: true}))
+    for (let i = 0; i < this.config.resourcesFolders.length; i++) {
+      this.express.use(express.static(this.config.resourcesFolders[i]))
+    }
+    // this.express.use(this.router)
+  }
 
-  socket.on('typing', function () {
-    var user = connectedUsers[socket.id]
-    user = (user) || 'anonymous'
-    socket.broadcast.emit('typing', user)
-  })
+  initRestControllers () {
+    this.controller = new IndexController(this.router, this.config.apiPrefix)
+  }
 
-  socket.on('chat', function (msg) {
-    var user = connectedUsers[socket.id]
-    user = (user) || 'anonymous'
-    socket.broadcast.emit('chat', user + ' - ' + msg)
-  })
+  initRoutes () {
+    this.express.get('/docs', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'docs', 'index.html')))
+    this.express.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', '/index.html')))
+  }
 
-  socket.on('disconnect', function () {
-    var user = connectedUsers[socket.id]
-    socket.broadcast.emit('userdisconnected', user)
-    socket.broadcast.emit('chat', 'user ' + user + ' disconnected')
-        // delete user;
-  })
-})
-
-http.listen(3000, function () {
-  console.log('listening on *:3000')
-})
+  initSocketManager () {
+    this.socketManager = new SocketManager(this.httpServer, this.eventEmitter)
+  }
+}
