@@ -2,3 +2,4 @@
 node_modules
 static/client.min.js
 static/main.min.css
+static/docs
