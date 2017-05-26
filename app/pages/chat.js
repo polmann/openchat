@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SocketIOClient from 'socket.io-client'
 import config from '../config/default.json'
 
 import Navbar from '../components/navbar'
@@ -13,26 +14,17 @@ export default class Chat extends Component {
     super()
     this.state = {
       activeConversationId: -1,
-      conversations: [
-        {
-          id: 1,
-          name: 'Alice',
-          history: [
-            {username: 'me', content: 'hi'},
-            {username: 'Alice', content: 'hello'},
-            {username: 'me', content: 'how are you?'},
-            {username: 'Alice', content: 'fine'}
-          ]
-        },
-        {
-          id: 2,
-          name: 'Bob',
-          history: [
-            {username: 'me', content: 'yeaah'}
-          ]
-        }
-      ]
+      conversations: []
     }
+    this.initSocket()
+  }
+
+  initSocket () {
+    this.socket = SocketIOClient('http://localhost:3000')
+    this.socket.on('chat.init', (conversations) => {
+      this.setState({conversations})
+      console.log('init.chat', JSON.stringify(this.state))
+    })
   }
 
   getConversation (conversationId) {

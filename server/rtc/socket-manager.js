@@ -1,6 +1,7 @@
 'use strict'
 
 import SocketIO from 'socket.io'
+import SocketClient from './socket-client'
 
 export default class SocketManager {
   constructor (httpServer, eventEmitter) {
@@ -11,32 +12,14 @@ export default class SocketManager {
     this.io.on('connection', this.handleConnect.bind(this))
   }
 
-  initClientListeners (socket) {
-    socket.on('typing', this.handleTyping)
-    socket.on('chat', this.handleChat)
-    socket.on('disconnect', this.handleDisconnect.bind(this))
-  }
-
   handleConnect (socket) {
-    console.log('socket connected ', socket.id)
-    socket.emit('usersonline', 'bla')
-    socket.broadcast.emit('userconnected', socket.id)
-    this.initClientListeners(socket)
-    this.clients[socket.id] = socket
+    console.log('user connected ', socket.id)
+    socket.on('disconnect', this.handleClientDisconnect.bind(this, socket.id))
+    this.clients[socket.id] = new SocketClient(socket)
   }
 
-  handleTyping (conversationId) {
-    this.broadcast.to(conversationId).emit('typing', this.id)
-  }
-
-  handleChat (message) {
-    console.log('new message ', JSON.stringify(message))
-    this.broadcast.to(message.conversationId).emit('chat', message)
-  }
-
-  handleDisconnect (socketId) {
-    console.log('socket disconnected ', socketId)
-    this.clients[socketId].broadcast.emit('disconnected', socketId)
+  handleClientDisconnect (socketId) {
+    console.log('user disconnected ', socketId)
     delete this.clients[socketId]
   }
 }
