@@ -6,12 +6,13 @@ export default class SocketClient {
     this.id = this.socket.id
     this.socket.broadcast.emit('chat.user.connected', this.socket.id)
     this.init()
+    this.initListeners()
   }
 
   init () {
-    this.socket.emit('chat.init', [
-      {
-        id: 1,
+    this.socket.emit('chat.init', {
+      123: {
+        id: 123,
         name: 'Alice',
         history: [
           {username: 'me', content: 'hi'},
@@ -20,14 +21,14 @@ export default class SocketClient {
           {username: 'Alice', content: 'fine'}
         ]
       },
-      {
-        id: 2,
+      456: {
+        id: 456,
         name: 'Bob',
         history: [
           {username: 'me', content: 'yeaah'}
         ]
       }
-    ])
+    })
   }
 
   getId () {
@@ -44,6 +45,7 @@ export default class SocketClient {
   }
 
   handleChat (message) {
+    console.log('got a message: ', JSON.stringify(message))
     this.socket.broadcast.to(message.conversationId).emit('chat.message', message)
   }
 }

@@ -7,9 +7,14 @@ export default class LoginForm extends Component {
         <input
           type='text'
           className='form-control'
-          name='username'
-          id='username'
-          placeholder='Enter username' />
+          name='email'
+          id='email'
+          placeholder='Enter email' />
+        <input
+          type='password'
+          className='form-control'
+          name='password'
+          id='password' />
         <button
           className='btn btn-default'
           id='enter-btn'>

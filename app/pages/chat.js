@@ -8,6 +8,7 @@ import ChatHeader from '../components/chat-header'
 import History from '../components/history'
 import MessageInput from '../components/message-input'
 
+import * as ChatActions from '../actions/chat'
 import ChatStore from '../stores/chat'
 
 export default class Chat extends Component {
@@ -20,14 +21,19 @@ export default class Chat extends Component {
   }
 
   componentWillMount () {
-    ChatStore.on('change', () => this.setState({conversations: ChatStore.getConversations()}))
+    ChatStore.on('change', this.setConversations.bind(this))
   }
 
-  getConversation (conversationId) {
-    let conversation = this.state.conversations.find((conversation) => {
-      return conversation.id === conversationId
-    })
-    return conversation || null
+  componentWillUnmount () {
+    ChatStore.removeListener('change', this.setConversations.bind(this))
+  }
+
+  setConversations () {
+    this.setState({conversations: ChatStore.getConversations()})
+  }
+
+  getActiveConversation () {
+    return this.state.conversations[this.state.activeConversationId] || null
   }
 
   handleActivateConversation (conversationId) {
@@ -35,14 +41,15 @@ export default class Chat extends Component {
   }
 
   handleMessageInput (messageContent) {
-    let message = {username: 'me', content: messageContent}
-    let conversation = this.getConversation(this.state.activeConversationId)
-    conversation.history.push(message)
-    let conversations = this.state.conversations
-    this.setState({conversations})
+    let message = {
+      conversationId: this.state.activeConversationId,
+      data: {username: 'me', content: messageContent}
+    }
+    ChatActions.message(message)
   }
 
-  renderEachConversation (conversation) {
+  renderEachConversation (conversationId) {
+    let conversation = this.state.conversations[conversationId]
     return <ConversationItem
       key={conversation.id}
       conversation={conversation}
@@ -73,15 +80,15 @@ export default class Chat extends Component {
 
   render () {
     const { appName } = config
-    const { activeConversationId, conversations } = this.state
-    let activeConversation = this.getConversation(activeConversationId)
+    const { conversations } = this.state
+    let activeConversation = this.getActiveConversation()
 
     return (
       <div className='row no-gutters'>
         <div className='col-sm-4 col-md-3 sidebar'>
           <Navbar title={appName} />
           <ul className='nav flex-column' id='coversations'>
-            { conversations.map(this.renderEachConversation, this) }
+            { Object.keys(conversations).map(this.renderEachConversation, this) }
           </ul>
         </div>
         { (activeConversation) ? this.renderActiveConversation(activeConversation) : this.renderEmptyConversation() }

@@ -1,28 +1,36 @@
-
 import { EventEmitter } from 'events'
-import SocketIOClient from 'socket.io-client'
+import dispatcher from '../dispatcher'
 
 class ChatStore extends EventEmitter {
   constructor () {
     super()
-    this.conversations = []
-    this.initSocket()
-  }
-
-  initSocket () {
-    this.socket = SocketIOClient('http://localhost:3000')
-    this.socket.on('chat.init', (conversations) => {
-      this.conversations = conversations
-      this.emit('change')
-      console.log('init.chat', JSON.stringify(this.getConversations()))
-    })
+    this.conversations = {}
   }
 
   getConversations () {
     return this.conversations
   }
+
+  init (conversations) {
+    this.conversations = conversations
+    this.emit('change')
+  }
+
+  message (message) {
+    this.conversations[message.conversationId].history.push(message.data)
+    this.emit('change')
+  }
+
+  handleActions (action) {
+    switch (action.type) {
+      case 'chat.init': this.init(action.data)
+        break
+      case 'chat.message': this.message(action.data)
+        break
+    }
+  }
 }
 
 const chatStore = new ChatStore()
-window.chatStore = chatStore
+dispatcher.register(chatStore.handleActions.bind(chatStore))
 export default chatStore
