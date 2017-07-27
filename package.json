@@ -2,6 +2,7 @@
   "name": "webchat",
   "version": "0.0.1",
   "description": "a socket.io tutorial",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev-server": "nodemon index.js",
