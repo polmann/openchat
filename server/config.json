@@ -1,5 +1,5 @@
 {
-  "port": 25225,
+  "port": 3000,
   "domain": "",
   "apiPrefix": "/api",
   "resourcesFolders": [

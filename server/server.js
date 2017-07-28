@@ -26,8 +26,8 @@ export default class Server {
     this.initExpress()
     this.initRoutes()
     this.initSocketManager()
-    this.httpServer.listen(this.config.port, () => {
-      console.log('listening on *:', this.config.port)
+    this.httpServer.listen(process.env.PORT || this.config.port, () => {
+      console.log('listening on *:', process.env.PORT || this.config.port)
     })
   }
 
