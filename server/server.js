@@ -9,7 +9,7 @@ import compression from 'compression'
 import bodyParser from 'body-parser'
 import IndexController from './rest/controllers/index'
 import SocketManager from './rtc/socket-manager'
-import schema from './schema'
+import schema from './graphql/schema'
 
 export default class Server {
   constructor (config) {
