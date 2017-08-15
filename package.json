@@ -13,7 +13,7 @@
     "dev:start": "nodemon server/index.js",
     "dev:build": "webpack --watch",
     "test:api": "dredd --help",
-    "apidocs": "aglio --theme-variables streak --theme-template triple -i server/api-description.apib -o static/docs/index.html"
+    "apidocs": "mkdir static/docs/ && touch static/docs/index.html && aglio --theme-variables streak --theme-template triple -i server/api-description.apib -o static/docs/index.html"
   },
   "dependencies": {
     "babel-loader": "^7.1.1",
