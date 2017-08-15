@@ -1,7 +1,8 @@
 import dispatcher from '../dispatcher'
 import SocketIOClient from 'socket.io-client'
 
-const socket = SocketIOClient('http://localhost:3000')
+const path = window.location.origin
+const socket = SocketIOClient(path)
 
 export function init (conversations) {
   dispatcher.dispatch({
