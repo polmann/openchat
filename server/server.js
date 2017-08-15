@@ -4,10 +4,12 @@ import path from 'path'
 import http from 'http'
 import EventEmitter from 'events'
 import express from 'express'
+import expressGraphQL from 'express-graphql'
 import compression from 'compression'
 import bodyParser from 'body-parser'
 import IndexController from './rest/controllers/index'
 import SocketManager from './rtc/socket-manager'
+import schema from './schema'
 
 export default class Server {
   constructor (config) {
@@ -49,7 +51,11 @@ export default class Server {
 
   initRoutes () {
     this.express.get('/docs', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'docs', 'index.html')))
-    this.express.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', '/index.html')))
+    this.express.use('/graphql', expressGraphQL({
+      schema: schema,
+      graphiql: true
+    }))
+    this.express.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'index.html')))
   }
 
   initSocketManager () {
