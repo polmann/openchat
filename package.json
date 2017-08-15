@@ -16,6 +16,7 @@
     "apidocs": "mkdir static/docs/ && touch static/docs/index.html && aglio --theme-variables streak --theme-template triple -i server/api-description.apib -o static/docs/index.html"
   },
   "dependencies": {
+    "aglio": "^2.3.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-html-attrs": "^2.0.0",
@@ -44,7 +45,6 @@
     "webpack": "^2.7.0"
   },
   "devDependencies": {
-    "aglio": "^2.3.0",
     "dredd": "^3.5.1",
     "standard": "^10.0.3"
   }
